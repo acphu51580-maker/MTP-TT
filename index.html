@@ -243,19 +243,13 @@ onValue(ref(db, DB_PATH + '/settings'), (snap) => {
   render();
 });
 
+// ✅ FIX: KHÔNG TỰ TẠO LINK MẶC ĐỊNH NỮA
 onValue(ref(db, DB_PATH + '/links'), (snap) => {
   const d = snap.val();
   if (d) {
     settings.links = Object.entries(d).map(([id, l]) => ({ id, ...l })).sort((a,b) => (a.order||0) - (b.order||0));
   } else {
     settings.links = [];
-    const defaults = [
-      { type:'facebook', name:'Facebook', url:'https://facebook.com', icon:'📘' },
-      { type:'tiktok', name:'TikTok', url:'https://tiktok.com', icon:'🎵' },
-      { type:'zalo', name:'Zalo', url:'https://zalo.me/0332088542', icon:'💬' },
-      { type:'phone', name:'0332 088 542', url:'tel:0332088542', icon:'📞' }
-    ];
-    defaults.forEach((l, i) => push(ref(db, DB_PATH + '/links'), { ...l, order:i }));
   }
   renderLinks();
   if (currentTab === 'links' && document.getElementById('adminModal').classList.contains('show')) renderTabContent();
@@ -276,7 +270,6 @@ function applyBackground(){
   body.classList.remove('bg-hidden');
   if (settings.bgType === 'image' && settings.bgValue) {
     const sz = settings.bgSize === 'cover' ? 'cover' : settings.bgSize === 'contain' ? 'contain' : 'auto';
-    const zoom = settings.bgZoom !== 100 ? `, size:${settings.bgZoom}%` : '';
     body.style.background = `url('${settings.bgValue}')`;
     body.style.backgroundSize = sz;
     body.style.backgroundPosition = `${settings.bgPosX} ${settings.bgPosY}`;
@@ -322,6 +315,10 @@ function render(){
 function renderLinks(){
   const c = document.getElementById('linkContainer');
   if (!c) return;
+  if (settings.links.length === 0) {
+    c.innerHTML = '';
+    return;
+  }
   c.innerHTML = settings.links.map(l => {
     const ico = l.icon || TYPE_ICON[l.type] || '🔗';
     const cls = l.iconColor ? getIconClass(l.iconColor) : getIconClass(l.type);
@@ -495,7 +492,7 @@ function renderTabContent(){
   } else if (currentTab === 'links') {
     c.innerHTML = `
       <button class="btn" onclick="openLinkEdit(null)" style="margin-bottom:14px">➕ Thêm link mới</button>
-      ${settings.links.length === 0 ? '<p style="text-align:center;color:#888;font-size:13px">Chưa có link</p>' : ''}
+      ${settings.links.length === 0 ? '<p style="text-align:center;color:#888;font-size:13px">Chưa có link — bấm "Thêm link mới" để bắt đầu</p>' : ''}
       ${settings.links.map(l => `
         <div class="link-row">
           <h4>${l.icon || '🔗'} ${l.name}</h4>
@@ -512,7 +509,6 @@ function renderTabContent(){
   }
 }
 
-// LOGO SIZE + POS
 window.changeLogoSize = async (v) => {
   settings.logoSize = parseInt(v);
   document.getElementById('logoSizeVal').textContent = v + 'px';
@@ -535,7 +531,6 @@ window.resetLogoPos = async () => {
   window.notif('Đã reset!');
 };
 
-// BACKGROUND POS + SIZE + ZOOM
 window.setBgSize = async (sz) => {
   settings.bgSize = sz;
   applyBackground();
@@ -713,7 +708,6 @@ window.openLinkEdit = (id) => {
   document.getElementById('linkEditModal').classList.add('show');
 };
 
-// SAVE LINK - TỰ ĐỘNG XỬ LÝ LINK
 window.saveLink = async () => {
   const type = document.getElementById('linkType').value;
   const name = document.getElementById('linkName').value.trim();
