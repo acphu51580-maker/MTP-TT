@@ -8,20 +8,19 @@
 :root{
   --main:#ff2a2a; --main-dark:#c00000; --main-rgb:255,42,42;
   --main-soft:rgba(255,42,42,.15); --main-glow:rgba(255,42,42,.5);
+  --logo-size:130px;
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
-body{min-height:100vh;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;padding:20px;overflow-x:hidden;position:relative}
-body.bg-image{background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;background-attachment:fixed!important}
-body.bg-image #stars{display:none}
-body.bg-color #stars{display:none}
+body{min-height:100vh;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;padding:20px;overflow-x:hidden;position:relative;background-size:cover;background-repeat:no-repeat;background-attachment:fixed}
+body.bg-hidden #stars{display:none}
 #stars{position:fixed;inset:0;z-index:0;background:radial-gradient(2px 2px at 20% 30%,#fff,transparent),radial-gradient(2px 2px at 60% 70%,#fff,transparent),radial-gradient(1px 1px at 50% 50%,#fff,transparent),radial-gradient(1px 1px at 80% 10%,#fff,transparent),radial-gradient(2px 2px at 90% 60%,#fff,transparent),radial-gradient(1px 1px at 33% 80%,#fff,transparent),radial-gradient(1px 1px at 15% 90%,#fff,transparent),radial-gradient(2px 2px at 70% 20%,#fff,transparent),radial-gradient(1px 1px at 45% 15%,#fff,transparent),radial-gradient(1px 1px at 10% 50%,#fff,transparent);background-color:#000;animation:twinkle 4s infinite alternate}
 @keyframes twinkle{0%{opacity:.6}100%{opacity:1}}
 .card{position:relative;z-index:1;width:100%;max-width:380px;background:rgba(15,15,25,.75);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(20px);border-radius:24px;padding:30px 22px 26px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6);animation:fadeUp .6s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-.logo-wrap{width:130px;height:130px;margin:0 auto 16px;border-radius:50%;overflow:hidden;cursor:pointer;position:relative;border:3px solid var(--main);box-shadow:0 0 30px var(--main-glow),inset 0 0 20px var(--main-soft);transition:.3s;user-select:none;animation:pulseGlow 3s infinite}
+.logo-wrap{width:var(--logo-size);height:var(--logo-size);margin:0 auto 16px;border-radius:50%;overflow:hidden;cursor:pointer;position:relative;border:3px solid var(--main);box-shadow:0 0 30px var(--main-glow),inset 0 0 20px var(--main-soft);transition:.3s;user-select:none;animation:pulseGlow 3s infinite}
 @keyframes pulseGlow{0%,100%{box-shadow:0 0 30px var(--main-glow),inset 0 0 20px var(--main-soft)}50%{box-shadow:0 0 50px var(--main-glow),inset 0 0 30px var(--main-soft)}}
-.logo-wrap img{width:100%;height:100%;object-fit:cover}
-.logo-wrap .ph{width:100%;height:100%;background:linear-gradient(135deg,#1a0000,#4a0000);display:flex;align-items:center;justify-content:center;font-size:50px;font-weight:900;color:var(--main)}
+.logo-wrap img{width:100%;height:100%;object-fit:cover;object-position:center}
+.logo-wrap .ph{width:100%;height:100%;background:linear-gradient(135deg,#1a0000,#4a0000);display:flex;align-items:center;justify-content:center;font-size:calc(var(--logo-size) * 0.4);font-weight:900;color:var(--main)}
 .logo-wrap:hover{transform:scale(1.05)}
 .name{font-size:24px;font-weight:900;background:linear-gradient(135deg,var(--main),var(--main));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;letter-spacing:.5px}
 .tagline{font-size:12px;color:var(--main);opacity:.7;margin-bottom:14px;letter-spacing:2px;font-weight:600}
@@ -67,7 +66,8 @@ body.bg-color #stars{display:none}
 .link-row button{padding:5px 10px;font-size:11px;border:none;border-radius:6px;cursor:pointer;font-weight:700;color:#fff;margin-right:5px}
 .upload-btn{background:#0a0a14;color:#fff;padding:12px;border-radius:10px;text-align:center;cursor:pointer;margin-bottom:12px;font-size:14px;border:2px dashed var(--main);font-weight:600}
 .preview{width:100px;height:100px;border-radius:50%;object-fit:cover;margin:0 auto 10px;display:block;border:2px solid var(--main)}
-.bg-preview{width:100%;height:150px;border-radius:12px;margin-bottom:10px;background-size:cover;background-position:center;border:2px solid var(--main);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px}
+.bg-preview{width:100%;height:180px;border-radius:12px;margin-bottom:10px;border:2px solid var(--main);background-color:#0a0a14;display:flex;align-items:center;justify-content:center;color:#888;font-weight:700;font-size:13px;overflow:hidden;position:relative}
+.bg-preview-img{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat}
 .notif{position:fixed;top:20px;right:20px;background:linear-gradient(135deg,#00c853,#00a844);color:#fff;padding:12px 18px;border-radius:10px;font-weight:700;font-size:13px;z-index:9999;animation:slideIn .3s;max-width:280px}
 .notif.error{background:linear-gradient(135deg,#ef4444,#dc2626)}
 @keyframes slideIn{from{transform:translateX(400px)}to{transform:translateX(0)}}
@@ -90,6 +90,11 @@ body.bg-color #stars{display:none}
 .bg-color-item{aspect-ratio:1/1;border-radius:10px;cursor:pointer;border:3px solid transparent;transition:.2s}
 .bg-color-item:hover{transform:scale(1.08)}
 .bg-color-item.selected{border-color:#fff;box-shadow:0 0 12px rgba(255,255,255,.6)}
+.pos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.pos-grid button{padding:12px;background:#0a0a14;border:1.5px solid #2a2a3a;border-radius:8px;cursor:pointer;font-size:11px;color:#fff;font-weight:600}
+.pos-grid button:hover,.pos-grid button.selected{border-color:var(--main);background:var(--main-soft);color:var(--main)}
+.slider{width:100%;margin:8px 0 14px;accent-color:var(--main)}
+.slider-lbl{display:flex;justify-content:space-between;font-size:12px;color:#aaa;margin-bottom:4px}
 </style>
 </head>
 <body>
@@ -151,7 +156,8 @@ body.bg-color #stars{display:none}
 <option value="link">🔗 Link khác</option>
 </select>
 <input id="linkName" placeholder="Tên hiển thị">
-<input id="linkUrl" placeholder="Link">
+<input id="linkUrl" placeholder="Link (SĐT/Zalo chỉ cần nhập số)">
+<p style="font-size:11px;color:#888;margin-bottom:10px">💡 SĐT & Zalo chỉ cần nhập số — tự thêm tel:/zalo.me</p>
 <p style="font-size:13px;color:var(--main);margin:8px 0 6px;font-weight:700">Chọn icon:</p>
 <div class="icon-picker" id="iconPicker"></div>
 <input id="linkCustomIcon" placeholder="Hoặc nhập emoji tuỳ chỉnh (VD: 🔥)" style="margin-top:6px" oninput="selectCustomIcon(this.value)">
@@ -190,11 +196,7 @@ const THEMES = [
   { id:'cyan', name:'Xanh ngọc', main:'#06b6d4', dark:'#0891b2', rgb:'6,182,212' },
 ];
 
-const BG_COLORS = [
-  '#000000','#0a0e17','#131826','#1a0033','#001a33',
-  '#1a0000','#0a1a00','#2a1a00','#1a002a','#0f0f0f',
-  '#ffffff','#f0f0f0','#e0e8f0','#ffe0e0','#e0ffe0',
-];
+const BG_COLORS = ['#000000','#0a0e17','#131826','#1a0033','#001a33','#1a0000','#0a1a00','#2a1a00','#1a002a','#0f0f0f','#ffffff','#f0f0f0','#e0e8f0','#ffe0e0','#e0ffe0'];
 
 const ICONS = [
   { e:'📘', c:'facebook' },{ e:'💌', c:'messenger' },{ e:'🎵', c:'tiktok' },
@@ -214,7 +216,10 @@ const TYPE_ICON = {
 let settings = {
   name:"Mr.Muop", tagline:"★ HACKER - CRACKER ★",
   desc:"Chào bạn! Mình là Mr.Muop — chuyên về các dịch vụ công nghệ, script, tool. Liên hệ mình qua các kênh bên dưới nhé!",
-  logo:"", music:"", theme:"red", bgType:"stars", bgValue:"", links:[]
+  logo:"", music:"", theme:"red", bgType:"stars", bgValue:"",
+  bgSize:"cover", bgPosX:"center", bgPosY:"center", bgZoom:100,
+  logoSize:130, logoPosX:50, logoPosY:50,
+  links:[]
 };
 let logoClickCount = 0, clickTimer = null, currentTab = 'info';
 let editingLinkId = null, selectedIcon = '📘', selectedIconColor = 'facebook';
@@ -234,6 +239,7 @@ onValue(ref(db, DB_PATH + '/settings'), (snap) => {
   if (d) settings = { ...settings, ...d };
   applyTheme(settings.theme || 'red');
   applyBackground();
+  applyLogoStyle();
   render();
 });
 
@@ -267,17 +273,38 @@ function applyTheme(themeId){
 
 function applyBackground(){
   const body = document.body;
-  body.classList.remove('bg-image','bg-color');
+  body.classList.remove('bg-hidden');
   if (settings.bgType === 'image' && settings.bgValue) {
-    body.style.background = `url('${settings.bgValue}') center/cover no-repeat fixed`;
-    body.classList.add('bg-image');
+    const sz = settings.bgSize === 'cover' ? 'cover' : settings.bgSize === 'contain' ? 'contain' : 'auto';
+    const zoom = settings.bgZoom !== 100 ? `, size:${settings.bgZoom}%` : '';
+    body.style.background = `url('${settings.bgValue}')`;
+    body.style.backgroundSize = sz;
+    body.style.backgroundPosition = `${settings.bgPosX} ${settings.bgPosY}`;
+    body.style.backgroundRepeat = 'no-repeat';
+    body.style.backgroundAttachment = 'fixed';
+    if (settings.bgZoom !== 100 && settings.bgSize !== 'contain') {
+      body.style.backgroundSize = `${settings.bgZoom}%`;
+    }
+    body.classList.add('bg-hidden');
   } else if (settings.bgType === 'color' && settings.bgValue) {
     body.style.background = settings.bgValue;
-    body.classList.add('bg-color');
+    body.style.backgroundSize = '';
+    body.style.backgroundPosition = '';
+    body.style.backgroundAttachment = '';
+    body.classList.add('bg-hidden');
   } else {
     body.style.background = '#000';
-    body.classList.remove('bg-image','bg-color');
+    body.style.backgroundSize = '';
+    body.style.backgroundPosition = '';
+    body.style.backgroundAttachment = '';
   }
+}
+
+function applyLogoStyle(){
+  const root = document.documentElement;
+  root.style.setProperty('--logo-size', (settings.logoSize || 130) + 'px');
+  const li = document.getElementById('logoImg');
+  if (li) li.style.objectPosition = `${settings.logoPosX || 50}% ${settings.logoPosY || 50}%`;
 }
 
 function render(){
@@ -289,6 +316,7 @@ function render(){
   const lp = document.getElementById('logoPh');
   if (settings.logo) { li.src = settings.logo; li.style.display = 'block'; lp.style.display = 'none'; }
   else { li.style.display = 'none'; lp.style.display = 'flex'; lp.textContent = (settings.name || 'M').charAt(0).toUpperCase(); }
+  applyLogoStyle();
 }
 
 function renderLinks(){
@@ -379,7 +407,20 @@ function renderTabContent(){
       <p style="text-align:center;color:#888;font-size:12px;margin:8px 0">Hoặc dán link ảnh:</p>
       <input id="logoUrl" placeholder="https://..." value="${settings.logo || ''}">
       <button class="btn" onclick="saveLogoUrl()">💾 Lưu link ảnh</button>
-      ${settings.logo ? `<button class="btn btn-danger" onclick="removeLogo()" style="margin-top:8px">🗑 Xóa logo</button>` : ''}`;
+      
+      <p style="color:var(--main);font-weight:700;margin:16px 0 8px;font-size:13px">🎨 Kích thước logo</p>
+      <div class="slider-lbl"><span>Nhỏ</span><span id="logoSizeVal">${settings.logoSize || 130}px</span><span>To</span></div>
+      <input type="range" class="slider" min="80" max="200" value="${settings.logoSize || 130}" oninput="changeLogoSize(this.value)">
+      
+      <p style="color:var(--main);font-weight:700;margin:16px 0 8px;font-size:13px">📍 Canh ảnh trong logo</p>
+      <p style="font-size:11px;color:#888;margin-bottom:6px">Ngang (X):</p>
+      <input type="range" class="slider" min="0" max="100" value="${settings.logoPosX || 50}" oninput="changeLogoPos('x', this.value)">
+      <p style="font-size:11px;color:#888;margin-bottom:6px">Dọc (Y):</p>
+      <input type="range" class="slider" min="0" max="100" value="${settings.logoPosY || 50}" oninput="changeLogoPos('y', this.value)">
+      <div style="display:flex;gap:6px;margin-top:10px">
+        <button class="btn btn-sec" onclick="resetLogoPos()" style="flex:1">🔄 Reset canh</button>
+        ${settings.logo ? `<button class="btn btn-danger" onclick="removeLogo()" style="flex:1">🗑 Xóa logo</button>` : ''}
+      </div>`;
   } else if (currentTab === 'color') {
     const cur = settings.theme || 'red';
     c.innerHTML = `
@@ -397,7 +438,6 @@ function renderTabContent(){
     const type = settings.bgType || 'stars';
     c.innerHTML = `
       <p style="font-size:13px;color:#aaa;margin-bottom:12px;text-align:center">Chọn nền cho web</p>
-      
       <div class="tabs" style="margin-bottom:12px">
         <button onclick="setBgType('stars')" class="${type==='stars'?'active':''}" style="flex:1">✨ Sao</button>
         <button onclick="setBgType('color')" class="${type==='color'?'active':''}" style="flex:1">🎨 Màu</button>
@@ -412,23 +452,46 @@ function renderTabContent(){
                  style="background:${col};border:2px solid #2a2a3a"
                  onclick="setBgColor('${col}')"></div>`).join('')}
         </div>
-        <p style="font-size:12px;color:#888;margin:8px 0">Hoặc nhập mã màu:</p>
+        <p style="font-size:12px;color:#888;margin:8px 0">Hoặc chọn màu tuỳ ý:</p>
         <input id="bgCustomColor" type="color" value="${settings.bgValue || '#000000'}" onchange="setBgColor(this.value)" style="height:50px;width:100%;border-radius:10px;cursor:pointer;padding:4px;background:#0a0a14;border:1.5px solid #2a2a3a">
       ` : ''}
 
       ${type === 'image' ? `
-        <div class="bg-preview" id="bgPreview" style="${settings.bgValue?`background-image:url('${settings.bgValue}')`:''}">
-          ${!settings.bgValue ? 'Chưa có ảnh nền' : ''}
+        <div class="bg-preview">
+          ${settings.bgValue ? `<div class="bg-preview-img" style="background-image:url('${settings.bgValue}');background-position:${settings.bgPosX} ${settings.bgPosY};background-size:${settings.bgSize === 'cover' ? 'cover' : settings.bgSize === 'contain' ? 'contain' : settings.bgZoom + '%'}"></div>` : 'Chưa có ảnh nền'}
         </div>
         <div class="upload-btn" onclick="document.getElementById('bgFile').click()">📷 Chọn ảnh nền từ máy</div>
         <input type="file" id="bgFile" accept="image/*" style="display:none" onchange="uploadBg(this)">
         <p style="text-align:center;color:#888;font-size:12px;margin:8px 0">Hoặc dán link ảnh nền:</p>
         <input id="bgUrl" placeholder="https://..." value="${settings.bgValue || ''}">
         <button class="btn" onclick="saveBgUrl()">💾 Lưu link ảnh</button>
+        
+        <p style="color:var(--main);font-weight:700;margin:16px 0 8px;font-size:13px">📐 Kiểu hiển thị</p>
+        <div class="tabs" style="margin-bottom:10px">
+          <button onclick="setBgSize('cover')" class="${settings.bgSize==='cover'?'active':''}" style="flex:1">Phủ kín</button>
+          <button onclick="setBgSize('contain')" class="${settings.bgSize==='contain'?'active':''}" style="flex:1">Vừa khung</button>
+          <button onclick="setBgSize('auto')" class="${settings.bgSize==='auto'?'active':''}" style="flex:1">Gốc</button>
+        </div>
+        
+        <p style="color:var(--main);font-weight:700;margin:16px 0 8px;font-size:13px">📍 Canh vị trí ảnh</p>
+        <div class="pos-grid">
+          <button onclick="setBgPos('left','top')" class="${settings.bgPosX==='left'&&settings.bgPosY==='top'?'selected':''}">↖ Trên trái</button>
+          <button onclick="setBgPos('center','top')" class="${settings.bgPosX==='center'&&settings.bgPosY==='top'?'selected':''}">⬆ Trên</button>
+          <button onclick="setBgPos('right','top')" class="${settings.bgPosX==='right'&&settings.bgPosY==='top'?'selected':''}">↗ Trên phải</button>
+          <button onclick="setBgPos('left','center')" class="${settings.bgPosX==='left'&&settings.bgPosY==='center'?'selected':''}">⬅ Trái</button>
+          <button onclick="setBgPos('center','center')" class="${settings.bgPosX==='center'&&settings.bgPosY==='center'?'selected':''}">⊕ Giữa</button>
+          <button onclick="setBgPos('right','center')" class="${settings.bgPosX==='right'&&settings.bgPosY==='center'?'selected':''}">➡ Phải</button>
+          <button onclick="setBgPos('left','bottom')" class="${settings.bgPosX==='left'&&settings.bgPosY==='bottom'?'selected':''}">↙ Dưới trái</button>
+          <button onclick="setBgPos('center','bottom')" class="${settings.bgPosX==='center'&&settings.bgPosY==='bottom'?'selected':''}">⬇ Dưới</button>
+          <button onclick="setBgPos('right','bottom')" class="${settings.bgPosX==='right'&&settings.bgPosY==='bottom'?'selected':''}">↘ Dưới phải</button>
+        </div>
+        
+        <p style="color:var(--main);font-weight:700;margin:16px 0 4px;font-size:13px">🔍 Zoom ảnh</p>
+        <div class="slider-lbl"><span>Nhỏ</span><span id="zoomVal">${settings.bgZoom || 100}%</span><span>To</span></div>
+        <input type="range" class="slider" min="50" max="300" value="${settings.bgZoom || 100}" oninput="changeBgZoom(this.value)">
       ` : ''}
 
-      <button class="btn btn-danger" onclick="resetBg()" style="margin-top:12px">🔄 Reset về mặc định (sao)</button>
-      <p style="font-size:11px;color:#666;margin-top:10px;text-align:center">💡 Ảnh nền sẽ phủ toàn màn hình, card vẫn nổi lên trên</p>`;
+      <button class="btn btn-danger" onclick="resetBg()" style="margin-top:12px">🔄 Reset về mặc định (sao)</button>`;
   } else if (currentTab === 'links') {
     c.innerHTML = `
       <button class="btn" onclick="openLinkEdit(null)" style="margin-bottom:14px">➕ Thêm link mới</button>
@@ -448,6 +511,53 @@ function renderTabContent(){
       ${settings.music ? `<button class="btn btn-danger" onclick="removeMusic()" style="margin-top:8px">🗑 Xóa nhạc</button>` : ''}`;
   }
 }
+
+// LOGO SIZE + POS
+window.changeLogoSize = async (v) => {
+  settings.logoSize = parseInt(v);
+  document.getElementById('logoSizeVal').textContent = v + 'px';
+  applyLogoStyle();
+  await update(ref(db, DB_PATH + '/settings'), { logoSize: settings.logoSize });
+};
+
+window.changeLogoPos = async (axis, v) => {
+  if (axis === 'x') settings.logoPosX = parseInt(v);
+  else settings.logoPosY = parseInt(v);
+  applyLogoStyle();
+  await update(ref(db, DB_PATH + '/settings'), { logoPosX: settings.logoPosX, logoPosY: settings.logoPosY });
+};
+
+window.resetLogoPos = async () => {
+  settings.logoPosX = 50; settings.logoPosY = 50; settings.logoSize = 130;
+  applyLogoStyle();
+  await update(ref(db, DB_PATH + '/settings'), { logoPosX: 50, logoPosY: 50, logoSize: 130 });
+  renderTabContent();
+  window.notif('Đã reset!');
+};
+
+// BACKGROUND POS + SIZE + ZOOM
+window.setBgSize = async (sz) => {
+  settings.bgSize = sz;
+  applyBackground();
+  await update(ref(db, DB_PATH + '/settings'), { bgSize: sz });
+  renderTabContent();
+};
+
+window.setBgPos = async (x, y) => {
+  settings.bgPosX = x;
+  settings.bgPosY = y;
+  applyBackground();
+  await update(ref(db, DB_PATH + '/settings'), { bgPosX: x, bgPosY: y });
+  renderTabContent();
+  window.notif('Đã canh ảnh!');
+};
+
+window.changeBgZoom = async (v) => {
+  settings.bgZoom = parseInt(v);
+  document.getElementById('zoomVal').textContent = v + '%';
+  applyBackground();
+  await update(ref(db, DB_PATH + '/settings'), { bgZoom: settings.bgZoom });
+};
 
 window.setBgType = async (type) => {
   settings.bgType = type;
@@ -493,10 +603,10 @@ window.uploadBg = async (inp) => {
 };
 
 window.resetBg = async () => {
-  if (!confirm('Reset nền về mặc định (sao)')) return;
-  settings.bgType = 'stars';
-  settings.bgValue = '';
-  await update(ref(db, DB_PATH + '/settings'), { bgType: 'stars', bgValue: '' });
+  if (!confirm('Reset nền về mặc định?')) return;
+  settings.bgType = 'stars'; settings.bgValue = '';
+  settings.bgSize = 'cover'; settings.bgPosX = 'center'; settings.bgPosY = 'center'; settings.bgZoom = 100;
+  await update(ref(db, DB_PATH + '/settings'), settings);
   applyBackground();
   renderTabContent();
   window.notif('Đã reset nền');
@@ -603,11 +713,33 @@ window.openLinkEdit = (id) => {
   document.getElementById('linkEditModal').classList.add('show');
 };
 
+// SAVE LINK - TỰ ĐỘNG XỬ LÝ LINK
 window.saveLink = async () => {
   const type = document.getElementById('linkType').value;
   const name = document.getElementById('linkName').value.trim();
-  const url = document.getElementById('linkUrl').value.trim();
+  let url = document.getElementById('linkUrl').value.trim();
   if (!name || !url) return window.notif('Nhập đủ tên và link', true);
+  
+  const phoneClean = url.replace(/[^0-9+]/g, '');
+  const isPhoneInput = /^[0-9+\s]+$/.test(url);
+  
+  if (type === 'phone') {
+    if (!url.startsWith('tel:')) url = 'tel:' + phoneClean;
+  } else if (type === 'zalo' || type === 'zalo-group') {
+    if (url.startsWith('tel:')) url = url.replace('tel:', '');
+    if (isPhoneInput || /^[0-9+\s]+$/.test(url)) {
+      url = 'https://zalo.me/' + url.replace(/\s/g, '');
+    } else if (!url.startsWith('http')) {
+      url = 'https://' + url;
+    }
+  } else if (type === 'gmail') {
+    if (!url.startsWith('mailto:') && !url.startsWith('http')) url = 'mailto:' + url;
+  } else {
+    if (!url.startsWith('http') && !url.startsWith('mailto:') && !url.startsWith('tel:')) {
+      url = 'https://' + url;
+    }
+  }
+  
   const icon = selectedIcon || TYPE_ICON[type] || '🔗';
   const iconColor = selectedIconColor || type;
   if (editingLinkId) {
