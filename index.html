@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mr.Muop - Landing</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+body{
+  min-height:100vh;
+  background:#000;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  overflow-x:hidden;
+  position:relative;
+}
+/* BACKGROUND SAO */
+#stars{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  background:
+    radial-gradient(2px 2px at 20% 30%,#fff,transparent),
+    radial-gradient(2px 2px at 60% 70%,#fff,transparent),
+    radial-gradient(1px 1px at 50% 50%,#fff,transparent),
+    radial-gradient(1px 1px at 80% 10%,#fff,transparent),
+    radial-gradient(2px 2px at 90% 60%,#fff,transparent),
+    radial-gradient(1px 1px at 33% 80%,#fff,transparent),
+    radial-gradient(1px 1px at 15% 90%,#fff,transparent),
+    radial-gradient(2px 2px at 70% 20%,#fff,transparent),
+    radial-gradient(1px 1px at 45% 15%,#fff,transparent),
+    radial-gradient(1px 1px at 10% 50%,#fff,transparent);
+  background-color:#000;
+  animation:twinkle 4s infinite alternate;
+}
+@keyframes twinkle{0%{opacity:.6}100%{opacity:1}}
+
+/* CARD CHÍNH */
+.card{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:380px;
+  background:rgba(15,15,25,.75);
+  border:1px solid rgba(255,255,255,.1);
+  backdrop-filter:blur(20px);
+  border-radius:24px;
+  padding:30px 22px 26px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+  animation:fadeUp .6s ease;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* LOGO */
+.logo-wrap{
+  width:130px;height:130px;
+  margin:0 auto 16px;
+  border-radius:50%;
+  overflow:hidden;
+  cursor:pointer;
+  position:relative;
+  border:3px solid #ff2a2a;
+  box-shadow:0 0 30px rgba(255,42,42,.5), inset 0 0 20px rgba(255,42,42,.3);
+  transition:.3s;
+  user-select:none;
+  animation:pulseGlow 3s infinite;
+}
+@keyframes pulseGlow{
+  0%,100%{box-shadow:0 0 30px rgba(255,42,42,.5), inset 0 0 20px rgba(255,42,42,.3)}
+  50%{box-shadow:0 0 50px rgba(255,42,42,.8), inset 0 0 30px rgba(255,42,42,.5)}
+}
+.logo-wrap img{width:100%;height:100%;object-fit:cover}
+.logo-wrap .ph{
+  width:100%;height:100%;
+  background:linear-gradient(135deg,#1a0000,#4a0000);
+  display:flex;align-items:center;justify-content:center;
+  font-size:50px;font-weight:900;color:#ff2a2a;
+}
+.logo-wrap:hover{transform:scale(1.05)}
+
+/* TÊN */
+.name{
+  font-size:24px;font-weight:900;
+  background:linear-gradient(135deg,#ff2a2a,#ff6b6b);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:6px;
+  letter-spacing:.5px;
+}
+.tagline{
+  font-size:12px;color:#ff8a8a;
+  margin-bottom:14px;
+  letter-spacing:2px;
+  font-weight:600;
+}
+.desc{
+  font-size:13px;
+  color:#a0a0b0;
+  line-height:1.6;
+  margin-bottom:22px;
+  padding:0 6px;
+}
+
+/* NÚT LIÊN KẾT */
+.links{display:flex;flex-direction:column;gap:10px}
+.link-btn{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 18px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  color:#fff;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:600;
+  transition:.25s;
+  cursor:pointer;
+}
+.link-btn:hover{
+  background:rgba(255,42,42,.15);
+  border-color:rgba(255,42,42,.5);
+  transform:translateX(4px);
+}
+.link-btn .ico{
+  width:36px;height:36px;
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;
+  flex-shrink:0;
+}
+.ico-fb{background:linear-gradient(135deg,#1877f2,#0c5dc7)}
+.ico-tt{background:linear-gradient(135deg,#000,#25f4ee,#fe2c55)}
+.ico-zl{background:linear-gradient(135deg,#0068ff,#0084ff)}
+.ico-phone{background:linear-gradient(135deg,#00c853,#00a844)}
+.ico-ms{background:linear-gradient(135deg,#0084ff,#00c6ff)}
+.ico-link{background:linear-gradient(135deg,#888,#555)}
+.link-btn .txt{flex:1;text-align:left}
+.link-btn .arr{color:#666;font-size:16px}
+
+/* MODAL */
+.modal-bg{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;
+  align-items:center;justify-content:center;
+  z-index:999;padding:15px;
+  backdrop-filter:blur(4px);
+}
+.modal-bg.show{display:flex}
+.modal{
+  background:#131320;
+  border:1px solid rgba(255,42,42,.3);
+  border-radius:18px;
+  padding:24px;
+  max-width:420px;width:100%;
+  max-height:90vh;overflow-y:auto;
+  animation:pop .3s;
+}
+@keyframes pop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+.modal h2{
+  color:#ff2a2a;font-size:20px;
+  margin-bottom:16px;font-weight:800;
+  text-align:center;
+}
+.modal input,.modal textarea{
+  width:100%;padding:12px 14px;
+  background:#0a0a14;
+  border:1.5px solid #2a2a3a;
+  border-radius:10px;
+  color:#fff;font-size:14px;
+  margin-bottom:10px;
+  font-family:inherit;
+}
+.modal input:focus,.modal textarea:focus{
+  outline:none;border-color:#ff2a2a;
+  box-shadow:0 0 0 3px rgba(255,42,42,.15);
+}
+.modal textarea{min-height:70px;resize:vertical}
+.btn{
+  width:100%;padding:12px;
+  background:linear-gradient(135deg,#ff2a2a,#c00000);
+  color:#fff;border:none;
+  border-radius:10px;
+  font-weight:700;cursor:pointer;
+  font-size:14px;margin-top:5px;
+  transition:.2s;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(255,42,42,.4)}
+.btn-sec{background:#2a2a3a}
+.btn-danger{background:linear-gradient(135deg,#ef4444,#dc2626)}
+
+/* ADMIN PANEL */
+.tabs{
+  display:flex;gap:6px;
+  margin-bottom:14px;flex-wrap:wrap;
+}
+.tabs button{
+  padding:8px 12px;
+  background:#1a1a2a;
+  color:#fff;border:1px solid #2a2a3a;
+  border-radius:8px;cursor:pointer;
+  font-size:12px;font-weight:600;
+}
+.tabs button.active{
+  background:linear-gradient(135deg,#ff2a2a,#c00000);
+  border-color:#ff2a2a;
+}
+.link-row{
+  background:#0a0a14;
+  padding:12px;
+  border-radius:10px;
+  margin-bottom:10px;
+  border-left:3px solid #ff2a2a;
+}
+.link-row h4{font-size:13px;color:#ff6b6b;margin-bottom:5px}
+.link-row p{font-size:12px;color:#888;word-break:break-all;margin-bottom:6px}
+.link-row button{
+  padding:5px 10px;font-size:11px;
+  border:none;border-radius:6px;
+  cursor:pointer;font-weight:700;
+  color:#fff;margin-right:5px;
+}
+.upload-btn{
+  background:#0a0a14;color:#fff;
+  padding:12px;border-radius:10px;
+  text-align:center;cursor:pointer;
+  margin-bottom:12px;font-size:14px;
+  border:2px dashed #ff2a2a;
+  font-weight:600;
+}
+.preview{
+  width:100px;height:100px;
+  border-radius:50%;
+  object-fit:cover;
+  margin:0 auto 10px;
+  display:block;
+  border:2px solid #ff2a2a;
+}
+.notif{
+  position:fixed;top:20px;right:20px;
+  background:linear-gradient(135deg,#00c853,#00a844);
+  color:#fff;padding:12px 18px;
+  border-radius:10px;font-weight:700;
+  font-size:13px;z-index:9999;
+  animation:slideIn .3s;
+}
+.notif.error{background:linear-gradient(135deg,#ef4444,#dc2626)}
+@keyframes slideIn{from{transform:translateX(400px)}to{transform:translateX(0)}}
+
+/* MUSIC BTN */
+.music-btn{
+  position:fixed;top:20px;left:20px;
+  width:44px;height:44px;
+  border-radius:50%;
+  background:rgba(255,42,42,.2);
+  border:2px solid #ff2a2a;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;cursor:pointer;
+  z-index:100;
+  transition:.2s;
+}
+.music-btn:hover{transform:scale(1.1)}
+.music-btn.playing{animation:spin 3s linear infinite}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+
+<!-- NÚT NHẠC -->
+<div class="music-btn" id="musicBtn" onclick="toggleMusic()" title="Bật/Tắt nhạc">🔇</div>
+
+<!-- CARD CHÍNH -->
+<div class="card">
+  <div class="logo-wrap" id="logoWrap" onclick="countLogoClick()">
+    <div class="ph" id="logoPh">M</div>
+    <img id="logoImg" style="display:none">
+  </div>
+  <div class="name" id="displayName">Mr.Muop</div>
+  <div class="tagline" id="displayTagline">★ HACKER - CRACKER ★</div>
+  <div class="desc" id="displayDesc">Chào bạn! Mình là Mr.Muop — chuyên về các dịch vụ công nghệ, script, tool. Liên hệ mình qua các kênh bên dưới nhé!</div>
+  <div class="links" id="linkContainer"></div>
+</div>
+
+<!-- ADMIN LOGIN MODAL -->
+<div class="modal-bg" id="adminLoginModal">
+  <div class="modal">
+    <h2>🔐 Đăng nhập Admin</h2>
+    <input id="adminUser" placeholder="Tên đăng nhập">
+    <input id="adminPass" type="password" placeholder="Mật khẩu">
+    <button class="btn" onclick="doAdminLogin()">Đăng nhập</button>
+    <button class="btn btn-sec" onclick="closeModal('adminLoginModal')">Hủy</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL MODAL -->
+<div class="modal-bg" id="adminModal">
+  <div class="modal" style="max-width:500px">
+    <h2>⚙️ Admin Panel</h2>
+    <div class="tabs">
+      <button onclick="showTab('info')" id="tabInfo" class="active">📝 Thông tin</button>
+      <button onclick="showTab('logo')" id="tabLogo">🖼️ Logo</button>
+      <button onclick="showTab('links')" id="tabLinks">🔗 Link</button>
+      <button onclick="showTab('music')" id="tabMusic">🎵 Nhạc</button>
+    </div>
+    <div id="tabContent"></div>
+    <button class="btn btn-sec" onclick="closeModal('adminModal')" style="margin-top:12px">Đóng</button>
+  </div>
+</div>
+
+<!-- LINK EDIT MODAL -->
+<div class="modal-bg" id="linkEditModal">
+  <div class="modal">
+    <h2 id="linkEditTitle">✏️ Sửa link</h2>
+    <select id="linkType" style="width:100%;padding:12px;background:#0a0a14;border:1.5px solid #2a2a3a;border-radius:10px;color:#fff;margin-bottom:10px;font-size:14px">
+      <option value="facebook">📘 Facebook</option>
+      <option value="tiktok">🎵 TikTok</option>
+      <option value="zalo">💬 Zalo</option>
+      <option value="phone">📞 SĐT</option>
+      <option value="messenger">💌 Messenger</option>
+      <option value="link">🔗 Link khác</option>
+    </select>
+    <input id="linkName" placeholder="Tên hiển thị (VD: Facebook cá nhân)">
+    <input id="linkUrl" placeholder="Link (VD: https://facebook.com/...)">
+    <button class="btn" onclick="saveLink()">💾 Lưu</button>
+    <button class="btn btn-sec" onclick="closeModal('linkEditModal')">Hủy</button>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, set, get, push, update, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAOKxix32T2rC9_TrF9mk6socuR0YCcVno",
+  authDomain: "mrphuc-51580.firebaseapp.com",
+  databaseURL: "https://mrphuc-51580-default-rtdb.firebaseio.com",
+  projectId: "mrphuc-51580",
+  storageBucket: "mrphuc-51580.firebasestorage.app",
+  messagingSenderId: "922607657180",
+  appId: "1:922607657180:web:2d1f482bd5aa562214d419"
+};
+const IMGBB_KEY = "11fa26a3d2a300961577fa631bfc603c";
+const ADMIN_USER = "MTP";
+const ADMIN_PASS = "MTP123";
+const DB_PATH = "mrmuop_landing";
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+let settings = {
+  name: "Mr.Muop",
+  tagline: "★ HACKER - CRACKER ★",
+  desc: "Chào bạn! Mình là Mr.Muop — chuyên về các dịch vụ công nghệ, script, tool. Liên hệ mình qua các kênh bên dưới nhé!",
+  logo: "",
+  music: "",
+  links: [
+    { type:"facebook", name:"Facebook", url:"https://facebook.com", id:"1" },
+    { type:"tiktok", name:"TikTok", url:"https://tiktok.com", id:"2" },
+    { type:"zalo", name:"Zalo", url:"https://zalo.me/0332088542", id:"3" },
+    { type:"phone", name:"0332 088 542", url:"tel:0332088542", id:"4" }
+  ]
+};
+
+let logoClickCount = 0;
+let clickTimer = null;
+let currentTab = 'info';
+let editingLinkId = null;
+let musicPlaying = false;
+
+// LOAD SETTINGS
+onValue(ref(db, DB_PATH + '/settings'), (snap) => {
+  const d = snap.val();
+  if (d) {
+    settings = { ...settings, ...d };
+    if (!d.links) settings.links = settings.links;
+  }
+  render();
+});
+
+onValue(ref(db, DB_PATH + '/links'), (snap) => {
+  const d = snap.val();
+  if (d) {
+    settings.links = Object.entries(d).map(([id, l]) => ({ id, ...l }));
+  } else {
+    // Khởi tạo link mặc định lần đầu
+    settings.links.forEach(l => {
+      const { id, ...rest } = l;
+      push(ref(db, DB_PATH + '/links'), rest);
+    });
+  }
+  renderLinks();
+});
+
+window.notif = (msg, err=false) => {
+  const el = document.createElement('div');
+  el.className = 'notif' + (err?' error':'');
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(), 2500);
+};
+
+window.closeModal = (id) => document.getElementById(id).classList.remove('show');
+
+// RENDER
+function render() {
+  document.getElementById('displayName').textContent = settings.name || 'Mr.Muop';
+  document.getElementById('displayTagline').textContent = settings.tagline || '';
+  document.getElementById('displayDesc').textContent = settings.desc || '';
+  document.title = settings.name || 'Mr.Muop';
+  
+  const logoWrap = document.getElementById('logoWrap');
+  const logoImg = document.getElementById('logoImg');
+  const logoPh = document.getElementById('logoPh');
+  if (settings.logo) {
+    logoImg.src = settings.logo;
+    logoImg.style.display = 'block';
+    logoPh.style.display = 'none';
+  } else {
+    logoImg.style.display = 'none';
+    logoPh.style.display = 'flex';
+    logoPh.textContent = (settings.name || 'M').charAt(0).toUpperCase();
+  }
+}
+
+function renderLinks() {
+  const c = document.getElementById('linkContainer');
+  if (!c) return;
+  const icoMap = {
+    facebook: { cls:'ico-fb', icon:'📘' },
+    tiktok: { cls:'ico-tt', icon:'🎵' },
+    zalo: { cls:'ico-zl', icon:'💬' },
+    phone: { cls:'ico-phone', icon:'📞' },
+    messenger: { cls:'ico-ms', icon:'💌' },
+    link: { cls:'ico-link', icon:'🔗' }
+  };
+  c.innerHTML = settings.links.map(l => {
+    const ico = icoMap[l.type] || icoMap.link;
+    return `<a class="link-btn" href="${l.url}" target="_blank" rel="noopener">
+      <div class="ico ${ico.cls}">${ico.icon}</div>
+      <div class="txt">${l.name}</div>
+      <div class="arr">›</div>
+    </a>`;
+  }).join('');
+}
+
+// CLICK LOGO 4 LẦN
+window.countLogoClick = () => {
+  logoClickCount++;
+  if (clickTimer) clearTimeout(clickTimer);
+  clickTimer = setTimeout(() => { logoClickCount = 0; }, 1500);
+  if (logoClickCount >= 4) {
+    logoClickCount = 0;
+    document.getElementById('adminLoginModal').classList.add('show');
+    document.getElementById('adminUser').value = '';
+    document.getElementById('adminPass').value = '';
+  }
+};
+
+window.doAdminLogin = () => {
+  const u = document.getElementById('adminUser').value.trim();
+  const p = document.getElementById('adminPass').value;
+  if (u !== ADMIN_USER || p !== ADMIN_PASS) {
+    return window.notif('Sai tên hoặc mật khẩu!', true);
+  }
+  closeModal('adminLoginModal');
+  window.notif('👑 Chào Admin!');
+  setTimeout(() => {
+    document.getElementById('adminModal').classList.add('show');
+    showTab('info');
+  }, 300);
+};
+
+// ADMIN TABS
+window.showTab = (t) => {
+  currentTab = t;
+  ['info','logo','links','music'].forEach(x => {
+    document.getElementById('tab' + x.charAt(0).toUpperCase() + x.slice(1)).classList.toggle('active', x === t);
+  });
+  renderTabContent();
+};
+
+function renderTabContent() {
+  const c = document.getElementById('tabContent');
+  if (currentTab === 'info') {
+    c.innerHTML = `
+      <input id="setName" placeholder="Tên hiển thị" value="${settings.name || ''}">
+      <input id="setTagline" placeholder="Tagline (VD: HACKER - CRACKER)" value="${settings.tagline || ''}">
+      <textarea id="setDesc" placeholder="Mô tả">${settings.desc || ''}</textarea>
+      <button class="btn" onclick="saveInfo()">💾 Lưu thông tin</button>
+    `;
+  } else if (currentTab === 'logo') {
+    c.innerHTML = `
+      ${settings.logo ? `<img class="preview" src="${settings.logo}">` : '<p style="text-align:center;color:#888;font-size:13px;margin-bottom:10px">Chưa có logo</p>'}
+      <div class="upload-btn" onclick="document.getElementById('logoFile').click()">📷 Chọn ảnh logo</div>
+      <input type="file" id="logoFile" accept="image/*" style="display:none" onchange="uploadLogo(this)">
+      <p style="text-align:center;color:#888;font-size:12px;margin:8px 0">Hoặc dán link ảnh:</p>
+      <input id="logoUrl" placeholder="https://..." value="${settings.logo || ''}">
+      <button class="btn" onclick="saveLogoUrl()">💾 Lưu link ảnh</button>
+      ${settings.logo ? `<button class="btn btn-danger" onclick="removeLogo()" style="margin-top:8px">🗑 Xóa logo</button>` : ''}
+    `;
+  } else if (currentTab === 'links') {
+    c.innerHTML = `
+      <button class="btn" onclick="openLinkEdit(null)" style="margin-bottom:14px">➕ Thêm link mới</button>
+      ${settings.links.length === 0 ? '<p style="text-align:center;color:#888;font-size:13px">Chưa có link</p>' : ''}
+      ${settings.links.map(l => `
+        <div class="link-row">
+          <h4>${l.name}</h4>
+          <p>${l.url}</p>
+          <button style="background:#2a2a3a" onclick="openLinkEdit('${l.id}')">✏️ Sửa</button>
+          <button style="background:#ef4444" onclick="deleteLink('${l.id}')">🗑 Xóa</button>
+        </div>
+      `).join('')}
+    `;
+  } else if (currentTab === 'music') {
+    c.innerHTML = `
+      <p style="font-size:13px;color:#aaa;margin-bottom:12px;text-align:center">Dán link nhạc (mp3) để phát nền</p>
+      <input id="musicUrl" placeholder="https://... .mp3" value="${settings.music || ''}">
+      <button class="btn" onclick="saveMusic()">💾 Lưu nhạc</button>
+      ${settings.music ? `<button class="btn btn-danger" onclick="removeMusic()" style="margin-top:8px">🗑 Xóa nhạc</button>` : ''}
+      <p style="font-size:12px;color:#666;margin-top:12px;text-align:center">Nhạc sẽ phát khi bấm nút loa ở góc trên trái</p>
+    `;
+  }
+}
+
+// SAVE INFO
+window.saveInfo = async () => {
+  const name = document.getElementById('setName').value.trim();
+  const tagline = document.getElementById('setTagline').value.trim();
+  const desc = document.getElementById('setDesc').value.trim();
+  if (!name) return window.notif('Nhập tên', true);
+  await update(ref(db, DB_PATH + '/settings'), { name, tagline, desc });
+  settings.name = name; settings.tagline = tagline; settings.desc = desc;
+  window.notif('Đã lưu!');
+  render();
+};
+
+// UPLOAD LOGO
+async function uploadToImgBB(file) {
+  const fd = new FormData();
+  fd.append('image', file);
+  const r = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_KEY}`, { method:'POST', body:fd });
+  const d = await r.json();
+  if (d.success) return d.data.url;
+  throw new Error('Lỗi upload');
+}
+
+window.uploadLogo = async (inp) => {
+  const f = inp.files[0]; if (!f) return;
+  window.notif('⏳ Đang tải ảnh...');
+  try {
+    const url = await uploadToImgBB(f);
+    await update(ref(db, DB_PATH + '/settings'), { logo: url });
+    settings.logo = url;
+    render();
+    renderTabContent();
+    window.notif('✅ Đã đổi logo!');
+  } catch(e) { window.notif('Lỗi: ' + e.message, true); }
+};
+
+window.saveLogoUrl = async () => {
+  const url = document.getElementById('logoUrl').value.trim();
+  await update(ref(db, DB_PATH + '/settings'), { logo: url });
+  settings.logo = url;
+  render();
+  renderTabContent();
+  window.notif('Đã lưu logo!');
+};
+
+window.removeLogo = async () => {
+  if (!confirm('Xóa logo?')) return;
+  await update(ref(db, DB_PATH + '/settings'), { logo: '' });
+  settings.logo = '';
+  render();
+  renderTabContent();
+  window.notif('Đã xóa logo');
+};
+
+// LINK
+window.openLinkEdit = (id) => {
+  editingLinkId = id;
+  const modal = document.getElementById('linkEditModal');
+  if (id) {
+    const l = settings.links.find(x => x.id === id);
+    document.getElementById('linkEditTitle').textContent = '✏️ Sửa link';
+    document.getElementById('linkType').value = l.type || 'link';
+    document.getElementById('linkName').value = l.name || '';
+    document.getElementById('linkUrl').value = l.url || '';
+  } else {
+    document.getElementById('linkEditTitle').textContent = '➕ Thêm link';
+    document.getElementById('linkType').value = 'facebook';
+    document.getElementById('linkName').value = '';
+    document.getElementById('linkUrl').value = '';
+  }
+  modal.classList.add('show');
+};
+
+window.saveLink = async () => {
+  const type = document.getElementById('linkType').value;
+  const name = document.getElementById('linkName').value.trim();
+  const url = document.getElementById('linkUrl').value.trim();
+  if (!name || !url) return window.notif('Nhập đủ tên và link', true);
+  if (editingLinkId) {
+    await update(ref(db, DB_PATH + '/links/' + editingLinkId), { type, name, url });
+    window.notif('Đã sửa!');
+  } else {
+    await push(ref(db, DB_PATH + '/links'), { type, name, url });
+    window.notif('Đã thêm!');
+  }
+  closeModal('linkEditModal');
+  setTimeout(() => renderTabContent(), 300);
+};
+
+window.deleteLink = async (id) => {
+  if (!confirm('Xóa link này?')) return;
+  await remove(ref(db, DB_PATH + '/links/' + id));
+  window.notif('Đã xóa');
+  setTimeout(() => renderTabContent(), 300);
+};
+
+// MUSIC
+window.saveMusic = async () => {
+  const url = document.getElementById('musicUrl').value.trim();
+  await update(ref(db, DB_PATH + '/settings'), { music: url });
+  settings.music = url;
+  window.notif('Đã lưu nhạc!');
+  renderTabContent();
+};
+
+window.removeMusic = async () => {
+  if (!confirm('Xóa nhạc?')) return;
+  await update(ref(db, DB_PATH + '/settings'), { music: '' });
+  settings.music = '';
+  window.notif('Đã xóa nhạc');
+  renderTabContent();
+};
+
+// MUSIC PLAYER
+const audio = new Audio();
+audio.loop = true;
+
+window.toggleMusic = () => {
+  const btn = document.getElementById('musicBtn');
+  if (!settings.music) {
+    window.notif('Chưa có nhạc! Admin vào thêm.', true);
+    return;
+  }
+  if (musicPlaying) {
+    audio.pause();
+    musicPlaying = false;
+    btn.textContent = '🔇';
+    btn.classList.remove('playing');
+  } else {
+    audio.src = settings.music;
+    audio.play().then(() => {
+      musicPlaying = true;
+      btn.textContent = '🔊';
+      btn.classList.add('playing');
+    }).catch(e => {
+      window.notif('Lỗi phát nhạc: ' + e.message, true);
+    });
+  }
+};
+
+// INIT
+render();
+</script>
+
+</body>
+</html>
